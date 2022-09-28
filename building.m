@@ -60,21 +60,13 @@ end
 function ret = print_block(in)
     hold on;
     points = zeros(in(end, 3), 1);
-    last_y = 0;
     for i = 1:length(in)
         x_l = in(i, 1);
         y = in(i, 2);
         x_r = in(i, 3);
         points(x_l:x_r) = y;
-        last_y = y;
-        % enclose the polygon
-        if i + 1 > length(in) || in(i, 3) ~= in(i + 1, 1)
-            % plot(polyshape(points));
-            stairs(points)
-            points = zeros(in(end, 3), 1);
-            last_y = 0;
-        end
     end
-
+    points = [0; points; 0; 0];
+    stairs((0:in(end, 3) + 2), points);
     ret = points;
 end
