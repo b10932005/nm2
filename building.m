@@ -64,7 +64,7 @@ function ret = print_block(in)
         x_l = in(i, 1);
         y = in(i, 2);
         x_r = in(i, 3);
-        points(x_l:x_r) = y;
+        points(x_l:x_r - 1) = y;
     end
     points = [0; points; 0; 0];
     stairs((0:in(end, 3) + 2), points);
