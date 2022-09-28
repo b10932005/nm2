@@ -57,23 +57,24 @@ function ret = stairs_(in)
     ret = print_block(in);
 end
 
-function ret = print_block(stairs)
+function ret = print_block(in)
     hold on;
-    points = [];
-    ret = [];
+    points = zeros(in(end, 3), 1);
     last_y = 0;
-    for i = 1:length(stairs)
-        x = stairs(i, 1);
-        y = stairs(i, 2);
-        points = [points; x last_y; x y];
+    for i = 1:length(in)
+        x_l = in(i, 1);
+        y = in(i, 2);
+        x_r = in(i, 3);
+        points(x_l:x_r) = y;
         last_y = y;
         % enclose the polygon
-        if i + 1 > length(stairs) || stairs(i, 3) ~= stairs(i + 1, 1)
-            points = [points; stairs(i, 3) y; stairs(i, 3) 0];
-            plot(polyshape(points));
-            ret = [ret; points];
-            points = [];
+        if i + 1 > length(in) || in(i, 3) ~= in(i + 1, 1)
+            % plot(polyshape(points));
+            stairs(points)
+            points = zeros(in(end, 3), 1);
             last_y = 0;
         end
     end
+
+    ret = points;
 end
