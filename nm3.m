@@ -20,7 +20,7 @@ end
 end
 %}
 
-[x, y] = meshgrid(-10:0.5:10);
-z = log(exp(x + 1i .* y));
+[x, y] = meshgrid(linspace(-20, 20, 40));
+z = exp(x) .* (cos(y) + 1i * sin(y));
 figure;
-surf(x, y, abs(z))
+surf(x, y, real(z))
